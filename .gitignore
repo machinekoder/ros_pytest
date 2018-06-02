@@ -1,0 +1,4 @@
+# Linux
+.directory
+core
+!core/
