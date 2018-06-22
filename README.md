@@ -18,3 +18,5 @@ A more elaborate description for why I created this ROS package can be found on 
 ## Run
 
 To run the unit tests use following command inside your ROS package `catkin run_tests --this`.
+
+Then view the test results with: `catkin_test_results`
