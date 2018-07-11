@@ -51,6 +51,7 @@
   <buildtool_depend>catkin</buildtool_depend>
   <depend>rospy</depend>
   <depend>python-pytest</depend>
+  <test_depend>rostest</test_depend>
 
 
   <!-- The export tag contains other, unspecified, tags -->
