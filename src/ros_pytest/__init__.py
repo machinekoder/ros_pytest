@@ -15,7 +15,8 @@ def get_output_file(argv):
 
 def run_pytest(argv):
     output_file = get_output_file(argv)
+    root_dir = os.path.dirname(output_file)
     test_module = rospy.get_param('test_module')
     module_path = os.path.realpath(test_module)
 
-    return pytest.main([module_path, '--junitxml={}'.format(output_file)])
+    return pytest.main([module_path, '--junitxml={}'.format(output_file), '--rootdir={}'.format(root_dir)])
