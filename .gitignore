@@ -1,3 +1,6 @@
+# Python
+*.pyc
+
 # Linux
 .directory
 core
