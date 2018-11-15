@@ -10,6 +10,15 @@ def test_output_file_is_correctly_extracted_from_argv():
     assert output == '~/junit_output.xml'
 
 
+def test_additional_args_are_correctly_extracted_from_argv():
+    output = ros_pytest.get_additional_args([
+        'runner.py', '--gtest_output=xml:~/junit_output.xml',
+        '--ignore=some_tests', '__name:=test_lib',
+    ])
+
+    assert output == ['--ignore=some_tests']
+
+
 def test_not_passing_output_file_throws_runtime_error():
     with pytest.raises(RuntimeError):
         ros_pytest.get_output_file(['main.py', '--file', 'random.txt'])

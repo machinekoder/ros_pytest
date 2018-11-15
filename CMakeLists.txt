@@ -105,6 +105,7 @@ catkin_package(
 #  LIBRARIES ros_pytest
 #  CATKIN_DEPENDS pyros python-pytest
 #  DEPENDS system_lib
+   CFG_EXTRAS pytest.cmake
 )
 
 ###########
