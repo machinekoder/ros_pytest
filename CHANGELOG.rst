@@ -2,8 +2,8 @@
 Changelog for package ros_pytest
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-Forthcoming
------------
+0.1.2 (2018-11-15)
+------------------
   Added add_pytests cmake macro
 * Added add_pytests cmake macro
 * enable passing of additional commands
