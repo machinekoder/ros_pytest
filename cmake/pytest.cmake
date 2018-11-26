@@ -67,12 +67,7 @@ function(add_pytests path)
   # make --junit-xml argument an absolute path
   get_filename_component(output_path "${output_path}" ABSOLUTE)
   set(cmd "${CMAKE_COMMAND} -E make_directory ${output_path}")
-  if(IS_DIRECTORY ${_path_name})
-    set(tests "--where=${_path_name}")
-  else()
-    set(tests "${_path_name}")
-  endif()
-  set(cmd ${cmd} "${PYTESTS} ${tests} ${_pytest_OPTIONS} --junit-xml=${output_path}/pytests-${output_file_name}.xml${_covarg}")
+  set(cmd ${cmd} "${PYTESTS} ${_path_name} ${_pytest_OPTIONS} --junit-xml=${output_path}/pytests-${output_file_name}.xml${_covarg}")
   catkin_run_tests_target("pytests" ${output_file_name} "pytests-${output_file_name}.xml" COMMAND ${cmd} DEPENDENCIES ${_pytest_DEPENDENCIES} WORKING_DIRECTORY ${_pytest_WORKING_DIRECTORY})
 endfunction()
 
