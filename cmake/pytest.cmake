@@ -49,9 +49,9 @@ function(add_pytests path)
   endif()
 
   # check if coverage reports are being requested
-  #if("$ENV{CATKIN_TEST_COVERAGE}" STREQUAL "1")
-  #  set(_covarg " --with-coverage")
-  #endif()
+  if("$ENV{CATKIN_TEST_COVERAGE}" STREQUAL "1")
+    set(_covarg " --cov=${PROJECT_NAME}")
+  endif()
 
   # strip PROJECT_SOURCE_DIR and PROJECT_BINARY_DIR prefix from output_file_name
   set(output_file_name ${path})
