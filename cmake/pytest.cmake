@@ -50,7 +50,7 @@ function(add_pytests path)
 
   # check if coverage reports are being requested
   if("$ENV{CATKIN_TEST_COVERAGE}" STREQUAL "1")
-    set(_covarg " --cov=${PROJECT_NAME}")
+    set(_covarg " --cov=${PROJECT_NAME} --cov-append")
   endif()
 
   # strip PROJECT_SOURCE_DIR and PROJECT_BINARY_DIR prefix from output_file_name
