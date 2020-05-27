@@ -67,13 +67,25 @@ function(add_pytests path)
   # make --junit-xml argument an absolute path
   get_filename_component(output_path "${output_path}" ABSOLUTE)
   set(cmd "${CMAKE_COMMAND} -E make_directory ${output_path}")
+  set(coverage_dir "${output_path}${output_file_name}_coverageDIR")
+
   if(IS_DIRECTORY ${_path_name})
     set(tests "--where=${_path_name}")
   else()
     set(tests "${_path_name}")
   endif()
+
+  add_custom_target(
+    create_coverage_dir_${output_file_name} "${CMAKE_COMMAND}" "-E" "make_directory" ${coverage_dir} COMMENT "Creating directory coverage"
+  )
+
   set(cmd ${cmd} "${PYTESTS} ${tests} ${_pytest_OPTIONS} --junit-xml=${output_path}/pytests-${output_file_name}.xml${_covarg}")
-  catkin_run_tests_target("pytests" ${output_file_name} "pytests-${output_file_name}.xml" COMMAND ${cmd} DEPENDENCIES ${_pytest_DEPENDENCIES} WORKING_DIRECTORY ${_pytest_WORKING_DIRECTORY})
+
+  # Copy coverage files to ${PROJECT_BINARY_DIR} for later collection by https://github.com/mikeferguson/code_coverage
+  set(cmd ${cmd} "cp ${coverage_dir}/.coverage ${PROJECT_BINARY_DIR}/.coverage.${output_file_name}")
+
+  catkin_run_tests_target("pytests" ${output_file_name} "pytests-${output_file_name}.xml" COMMAND ${cmd} DEPENDENCIES ${_pytest_DEPENDENCIES} create_coverage_dir_${output_file_name} WORKING_DIRECTORY ${coverage_dir})
+
 endfunction()
 
 find_program(PYTESTS NAMES
