@@ -92,7 +92,7 @@ function(add_pytests path)
 
     # Add target for creating the coverage directory
     add_custom_target(
-      create_coverage_dir_${output_file_name} "${CMAKE_COMMAND}" "-E" "make_directory" ${coverage_dir} COMMENT "Creating directory coverage"
+      create_coverage_dir_${output_file_name} "${CMAKE_COMMAND}" "-E" "make_directory" ${coverage_dir}
     )
 
     # Now depending on the coverage directory to be created
