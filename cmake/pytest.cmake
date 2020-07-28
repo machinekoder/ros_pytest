@@ -48,10 +48,6 @@ function(add_pytests path)
     endif()
   endif()
 
-  # check if coverage reports are being requested
-  #if("$ENV{CATKIN_TEST_COVERAGE}" STREQUAL "1")
-  #  set(_covarg " --with-coverage")
-  #endif()
 
   # strip PROJECT_SOURCE_DIR and PROJECT_BINARY_DIR prefix from output_file_name
   set(output_file_name ${path})
@@ -67,13 +63,46 @@ function(add_pytests path)
   # make --junit-xml argument an absolute path
   get_filename_component(output_path "${output_path}" ABSOLUTE)
   set(cmd "${CMAKE_COMMAND} -E make_directory ${output_path}")
+
   if(IS_DIRECTORY ${_path_name})
     set(tests "--where=${_path_name}")
   else()
     set(tests "${_path_name}")
   endif()
+
+  # check if coverage reports are being requested
+  if("$ENV{CATKIN_TEST_COVERAGE}" STREQUAL "1")
+    set(_covarg " --cov=${PROJECT_NAME} --cov-append")
+  endif()
+
   set(cmd ${cmd} "${PYTESTS} ${tests} ${_pytest_OPTIONS} --junit-xml=${output_path}/pytests-${output_file_name}.xml${_covarg}")
+
+  # check if coverage reports are being requested
+  if("$ENV{CATKIN_TEST_COVERAGE}" STREQUAL "1")
+
+    # A few quick words on the following lines:
+    # If the coverage is measured using pytest it will create a .coverage file within
+    # the active WORKING_DIRECTORY. This does not work if the tests run in parallel even with the --cov-append set.
+    # As a solution the following lines create a directory for every test execution.
+    # After the test run the .coverage file is copied into the ${PROJECT_BINARY_DIR}
+    # to be collected by e.g. by https://github.com/mikeferguson/code_coverage
+
+    set(coverage_dir "${output_path}${output_file_name}_coverageDIR")
+    set(cmd ${cmd} "cp ${coverage_dir}/.coverage ${PROJECT_BINARY_DIR}/.coverage.${output_file_name}")
+
+    # Add target for creating the coverage directory
+    add_custom_target(
+      create_coverage_dir_${output_file_name} "${CMAKE_COMMAND}" "-E" "make_directory" ${coverage_dir}
+    )
+
+    # Now depending on the coverage directory to be created
+    set(_pytest_DEPENDENCIES ${_pytest_DEPENDENCIES} create_coverage_dir_${output_file_name})
+
+    set(_pytest_WORKING_DIRECTORY ${coverage_dir})
+  endif()
+
   catkin_run_tests_target("pytests" ${output_file_name} "pytests-${output_file_name}.xml" COMMAND ${cmd} DEPENDENCIES ${_pytest_DEPENDENCIES} WORKING_DIRECTORY ${_pytest_WORKING_DIRECTORY})
+
 endfunction()
 
 find_program(PYTESTS NAMES
