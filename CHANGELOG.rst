@@ -2,8 +2,8 @@
 Changelog for package ros_pytest
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-Forthcoming
------------
+0.2.0 (2020-08-12)
+------------------
 * Merge pull request `#7 <https://github.com/machinekoder/ros_pytest/issues/7>`_ from machinekoder/fix-folders
 * Bugfix for pytest folder tests
 * Merge pull request `#5 <https://github.com/machinekoder/ros_pytest/issues/5>`_ from sfalexrog/python3_compat
