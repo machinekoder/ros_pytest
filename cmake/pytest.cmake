@@ -64,18 +64,12 @@ function(add_pytests path)
   get_filename_component(output_path "${output_path}" ABSOLUTE)
   set(cmd "${CMAKE_COMMAND} -E make_directory ${output_path}")
 
-  if(IS_DIRECTORY ${_path_name})
-    set(tests "--where=${_path_name}")
-  else()
-    set(tests "${_path_name}")
-  endif()
-
   # check if coverage reports are being requested
   if("$ENV{CATKIN_TEST_COVERAGE}" STREQUAL "1")
     set(_covarg " --cov=${PROJECT_NAME} --cov-append")
   endif()
 
-  set(cmd ${cmd} "${PYTESTS} ${tests} ${_pytest_OPTIONS} --junit-xml=${output_path}/pytests-${output_file_name}.xml${_covarg}")
+  set(cmd ${cmd} "${PYTESTS} ${_path_name} ${_pytest_OPTIONS} --junit-xml=${output_path}/pytests-${output_file_name}.xml${_covarg}")
 
   # check if coverage reports are being requested
   if("$ENV{CATKIN_TEST_COVERAGE}" STREQUAL "1")
