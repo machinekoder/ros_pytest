@@ -52,6 +52,8 @@
   <depend>rospy</depend>
   <depend condition="$ROS_PYTHON_VERSION == 2">python-pytest</depend>
   <depend condition="$ROS_PYTHON_VERSION == 3">python3-pytest</depend>
+  <depend condition="$ROS_PYTHON_VERSION == 2">python-pytest-cov</depend>
+  <depend condition="$ROS_PYTHON_VERSION == 3">python3-pytest-cov</depend>
   <test_depend>rostest</test_depend>
 
 
