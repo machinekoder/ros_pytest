@@ -2,6 +2,12 @@
 Changelog for package ros_pytest
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
+Forthcoming
+-----------
+* Merge pull request `#9 <https://github.com/machinekoder/ros_pytest/issues/9>`_ from jspricke/missing_dependencies
+  Add dependency on python-pytest-cov
+* Contributors: Alexander Rössler, Jochen Sprickerhof
+
 0.2.0 (2020-08-12)
 ------------------
 * Merge pull request `#7 <https://github.com/machinekoder/ros_pytest/issues/7>`_ from machinekoder/fix-folders
@@ -19,14 +25,13 @@ Changelog for package ros_pytest
 
 0.1.2 (2018-11-15)
 ------------------
-  Added add_pytests cmake macro
 * Added add_pytests cmake macro
 * enable passing of additional commands
 * Contributors: Alexander Rössler, Markus Grimm
 
 0.1.1 (2018-10-07)
 ------------------
-* *Release for melodic
+* Release for melodic
 
 0.1.0
 -----
