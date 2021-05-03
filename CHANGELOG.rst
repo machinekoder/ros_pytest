@@ -2,8 +2,8 @@
 Changelog for package ros_pytest
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-Forthcoming
------------
+0.2.1 (2021-05-03)
+------------------
 * Merge pull request `#9 <https://github.com/machinekoder/ros_pytest/issues/9>`_ from jspricke/missing_dependencies
   Add dependency on python-pytest-cov
 * Contributors: Alexander Rössler, Jochen Sprickerhof
